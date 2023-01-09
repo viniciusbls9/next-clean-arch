@@ -1,11 +1,11 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next"
 import { GetProductUseCase } from "../../@core/aplication/product/get-product.use-case"
+import { ProductsProps } from "../../@core/domain/entities/product"
 import { container, Registry } from "../../@core/infra/container-registry"
 import { useCart } from "../../context/cart.provider"
-import { Product } from '../../utils/models'
 
 type ProductDetailsPageProps = {
-    product: Product
+    product: ProductsProps
 }
 
 export const ProductDetailsPage: NextPage<ProductDetailsPageProps> = ({ product }) => {
