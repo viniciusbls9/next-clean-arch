@@ -18,5 +18,5 @@ container.bind(Registry.ProductGateway).toDynamicValue((context) => {
 })
 
 container.bind(Registry.ListProductsUseCase).toDynamicValue((context) => {
-    return new ListProductsUseCase(context.container.get(Registry.AxiosAdapter))
+    return new ListProductsUseCase(context.container.get(Registry.ProductGateway))
 })
