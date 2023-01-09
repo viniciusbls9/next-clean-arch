@@ -5,8 +5,8 @@ import { ProductGateway } from "../../domain/gateways/product.gateway";
 export class ProductHttpGateway implements ProductGateway {
     constructor(private http: AxiosInstance) { }
 
-    findAll(): Promise<Product[]> {
-        return this.http.get<Product[]>("/products").then((res) =>
+    async findAll(): Promise<Product[]> {
+        return await this.http.get<Product[]>("/products").then((res) =>
             res.data.map((data) =>
                 new Product({
                     id: data.id,
@@ -18,8 +18,8 @@ export class ProductHttpGateway implements ProductGateway {
         )
     }
 
-    findById(id: number): Promise<Product> {
-        return this.http.get<Product>(`/products/${id}`).then((res) => {
+    async findById(id: number): Promise<Product> {
+        return await this.http.get<Product>(`/products/${id}`).then((res) => {
             return new Product({
                 id: res.data.id,
                 title: res.data.title,
@@ -29,8 +29,8 @@ export class ProductHttpGateway implements ProductGateway {
         })
     }
 
-    findByLimit(limit: number): Promise<Product[]> {
-        return this.http.get<Product[]>(`/products?limit=${limit}`).then((res) =>
+    async findByLimit(limit: number): Promise<Product[]> {
+        return await this.http.get<Product[]>(`/products?limit=${limit}`).then((res) =>
             res.data.map((data) =>
                 new Product({
                     id: data.id,
