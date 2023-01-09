@@ -1,8 +1,7 @@
 import { GetServerSideProps } from "next"
 import Link from "next/link"
 import { ListProductsUseCase } from "../@core/aplication/product/list-product.use-case"
-import { ProductHttpGateway } from "../@core/infra/gateways/product-http.gateway"
-import { http } from "../@core/infra/http"
+import { container, Registry } from "../@core/infra/container-registry"
 import { HomeProps } from '../utils/models'
 
 export default function Home({ products }: HomeProps) {
@@ -24,19 +23,12 @@ export default function Home({ products }: HomeProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const useCase = ListProductsUseCaseFactory.create()
+  const useCase = container.get<ListProductsUseCase>(Registry.ListProductsUseCase)
   const products = await useCase.execute()
 
   return {
     props: {
       products: products.map((product) => product.toJSON())
     }
-  }
-}
-
-class ListProductsUseCaseFactory {
-  static create() {
-    const gateway = new ProductHttpGateway(http)
-    return new ListProductsUseCase(gateway)
   }
 }
