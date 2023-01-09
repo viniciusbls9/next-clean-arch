@@ -1,6 +1,7 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next"
+import { GetProductUseCase } from "../../@core/aplication/product/get-product.use-case"
+import { container, Registry } from "../../@core/infra/container-registry"
 import { useCart } from "../../context/cart.provider"
-import { http } from "../../utils/http"
 import { Product } from '../../utils/models'
 
 type ProductDetailsPageProps = {
@@ -31,9 +32,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
     const { id } = context.params || {}
 
-    const { data: product } = await http.get(`/products/${id}`)
+    const useCase = container.get<GetProductUseCase>(Registry.GetProductUseCase)
+
+    const product = await useCase.execute(+id!)
 
     return {
-        props: { product }
+        props: { product: product.toJSON() }
     }
 }
