@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { Container } from "inversify";
 import { AddProductInCartUseCase } from "../aplication/cart/add-product-in-cart.use-case";
 import { ClearCartUseCase } from "../aplication/cart/clear-cart.use-case";
