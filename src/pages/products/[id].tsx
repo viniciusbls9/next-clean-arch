@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next"
 import { GetProductUseCase } from "../../@core/aplication/product/get-product.use-case"
-import { ProductsProps } from "../../@core/domain/entities/product"
+import { Product, ProductsProps } from "../../@core/domain/entities/product"
 import { container, Registry } from "../../@core/infra/container-registry"
 import { useCart } from "../../context/cart.provider"
 
@@ -9,13 +9,14 @@ type ProductDetailsPageProps = {
 }
 
 export const ProductDetailsPage: NextPage<ProductDetailsPageProps> = ({ product }) => {
+    const productEntity = new Product({ ...product })
     const { addProduct } = useCart()
 
     return (
         <div>
             <h3>{product.title}</h3>
             <label>{product.price}</label>
-            <button onClick={() => addProduct(product)}>Adicionar ao carrinho</button>
+            <button onClick={() => addProduct(productEntity)}>Adicionar ao carrinho</button>
         </div>
     )
 }
