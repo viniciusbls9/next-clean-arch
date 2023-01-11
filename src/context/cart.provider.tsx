@@ -1,16 +1,18 @@
-import { createContext, PropsWithChildren, useCallback, useContext, useState } from "react"
+import { createContext, PropsWithChildren, useCallback, useContext, useEffect, useState } from "react"
 import { AddProductInCartUseCase } from "../@core/aplication/cart/add-product-in-cart.use-case"
 import { Cart } from "../@core/domain/entities/cart"
 import { container, Registry } from "../@core/infra/container-registry"
 import { Product } from '../@core/domain/entities/product'
 import { RemoveProductFromCartUseCase } from "../@core/aplication/cart/remove-product-from-cart.use-case"
 import { ClearCartUseCase } from "../@core/aplication/cart/clear-cart.use-case"
+import { GetCartUseCase } from "../@core/aplication/cart/get-cart.use-case"
 
 export type CartContextType = {
     cart: Cart
     addProduct: (product: Product) => void
     removeProduct: (productId: number) => void
     clear: () => void
+    reload: () => void
 }
 
 const defaultContext: CartContextType = {
@@ -18,10 +20,12 @@ const defaultContext: CartContextType = {
     addProduct: (product: Product) => { },
     removeProduct: (productId: number) => { },
     clear: () => { },
+    reload: () => {}
 }
 
 export const CartContext = createContext(defaultContext)
 
+const getCartUseCase = container.get<GetCartUseCase>(Registry.GetCartUseCase)
 const addProductUseCase = container.get<AddProductInCartUseCase>(Registry.AddProductInCartUseCase)
 const removeProductUseCase = container.get<RemoveProductFromCartUseCase>(Registry.RemoveProductFromCartUseCase)
 const clearCartUseCase = container.get<ClearCartUseCase>(Registry.ClearCartUseCase)
@@ -44,8 +48,17 @@ export const CartProvider = ({ children }: PropsWithChildren) => {
         setCart(cart)
     }, [])
 
+    const reload = useCallback(() => {
+        const cart = getCartUseCase.execute()
+        setCart(cart)
+    }, [])
+
+    useEffect(() => {
+        reload()
+    }, [reload])
+
     return (
-        <CartContext.Provider value={{ cart, addProduct, removeProduct, clear }}>
+        <CartContext.Provider value={{ cart, addProduct, removeProduct, clear, reload }}>
             {children}
         </CartContext.Provider>
     )
