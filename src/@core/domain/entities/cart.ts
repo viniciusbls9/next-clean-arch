@@ -7,7 +7,7 @@ export type CartProps = {
 export class Cart {
     constructor(public props: CartProps) {}
 
-    addProducts(product: Product) {
+    addProduct(product: Product) {
         this.props.products.push(product)
     }
 
