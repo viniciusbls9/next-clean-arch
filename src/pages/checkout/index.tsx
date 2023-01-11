@@ -12,7 +12,7 @@ export const CheckoutPage: NextPage = () => {
         event.preventDefault()
         const credit_card_number = event.currentTarget.credit_cart_number.value
         const { data: order } = await http.post('orders', {
-            products: cart.products,
+            products: cart.products.map(product => ({ ...product.props })),
             credit_card_number
         })
 
