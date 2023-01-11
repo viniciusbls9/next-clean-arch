@@ -1,15 +1,34 @@
 import { NextPage } from "next";
+import { useRouter } from "next/router";
 import { FormEvent } from "react";
+import { useCart } from "../../context/cart.provider";
+import { http } from "../../utils/http";
 
 export const CheckoutPage: NextPage = () => {
-    const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const { cart } = useCart()
+    const router = useRouter()
+
+    const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+        const credit_card_number = event.currentTarget.credit_cart_number.value
+        const { data: order } = await http.post('orders', {
+            products: cart.products,
+            credit_card_number
+        })
+
+        router.push(`/checkout/${order.id}/success`)
     }
 
     return (
         <div>
             <h3>My cart</h3>
-            <ul></ul>
+            <ul>
+                {cart.products.map((product) => (
+                    <li key={product.id}>
+                        Product {product.title} - {product.price}
+                    </li>
+                ))}
+            </ul>
             <form onSubmit={onSubmit}>
                 <div>
                     <label>Cartão crédito</label>
