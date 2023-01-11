@@ -1,11 +1,11 @@
 import { useCart } from "../context/cart.provider"
 
 export const MyCart = () => {
-    const { total, products } = useCart()
+    const { cart } = useCart()
 
     return (
         <nav>
-            Cart - Total: {total} | Items: {products.length}
+            Cart - Total: {cart.total} | Items: {cart.products.length}
         </nav>
     )
 }
