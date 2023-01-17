@@ -22,6 +22,10 @@ using software developer best practices.</p>
  - [Axios](https://axios-http.com/docs/intro)
  - [Fake Store Api](https://fakestoreapi.com)
 
+
+<h2>:bulb: To do</h2>
+- [ ] Implement tests with jest and React Testing Library
+
 ## Reference
 
 [Clean Architecture no Frontend com Next.js](https://www.youtube.com/watch?v=ewEFpEgaSdg)
