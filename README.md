@@ -1,9 +1,23 @@
 # Next with Clean Arch
 
-- Entities
+<img src="https://github.com/viniciusbls9/next-clean-arch/blob/main/.github/img/CleanArchitecture.jpg" />
 
-<p>used to model the data</p>
+<h2>:rocket: About the project</h2>
+<p>The project is a simple checkout system
+using software developer best practices.</p>
 
-- Gateway
+<p>This project was divided by:</p>
 
-<p>contract to work with the data</p>
+- Aplication
+- Domain
+    - Entities
+    - gateways
+- Infra
+
+<h2>:hammer_and_wrench: technology</h2>
+
+ - [React Native](https://reactjs.org/)
+ - [NextJS](https://vercel.com/home?utm_source=next-site&utm_medium=banner&utm_campaign=next-website)
+ - [Typescript](https://www.typescriptlang.org/)
+ - [Axios](https://axios-http.com/docs/intro)
+ - [Fake Store Api](https://fakestoreapi.com)
