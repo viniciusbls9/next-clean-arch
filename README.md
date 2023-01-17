@@ -21,3 +21,7 @@ using software developer best practices.</p>
  - [Typescript](https://www.typescriptlang.org/)
  - [Axios](https://axios-http.com/docs/intro)
  - [Fake Store Api](https://fakestoreapi.com)
+
+## Reference
+
+[Clean Architecture no Frontend com Next.js](https://www.youtube.com/watch?v=ewEFpEgaSdg)
