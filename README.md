@@ -24,7 +24,7 @@ using software developer best practices.</p>
 
 
 <h2>:bulb: To do</h2>
-- [ ] Implement tests with jest and React Testing Library
+- [] Implement tests with jest and React Testing Library
 
 ## Reference
 
